@@ -13,14 +13,15 @@
 
 
 
-    <DataGrid ItemsSource="{Binding Expenses}" CanUserAddRows="False" AutoGenerateColumns="False">
+    <DataGrid ItemsSource="{Binding Expenses}" CanUserAddRows="False" AutoGenerateColumns="False" >
         <DataGrid.Columns>
-            <DataGridTextColumn Header="Final Amount" Binding="{Binding FinalAmount}" />
-            <DataGridTextColumn Header="Currency" Binding="{Binding Currency}" />
-            <DataGridTextColumn Header="Semi Amount" Binding="{Binding SemiAmount}" Visibility="Collapsed" />
-            <DataGridTextColumn Header="Category" Binding="{Binding Category}" />
-            <DataGridTextColumn Header="Description" Binding="{Binding Description}" />
-            <DataGridTextColumn Header="Date" Binding="{Binding Date, StringFormat=\{0:yyyy-MM-dd\}}" />
+            <DataGridTextColumn Header="Currency" Binding="{Binding Currency}" IsReadOnly="True"/>
+            <DataGridTextColumn Header="Billing Amount" Binding="{Binding BillingAmount}"  IsReadOnly="True"/>
+            <DataGridTextColumn Header="Transaction Amount" Binding="{Binding TransactionAmount}" IsReadOnly="True"/>
+            <DataGridTextColumn Header="Category" Binding="{Binding Category}"  IsReadOnly="True"/>
+            <DataGridTextColumn Header="Description" Binding="{Binding Description}"  IsReadOnly="True"/>
+            <DataGridTextColumn Header="Date" Binding="{Binding Date, StringFormat=\{0:yyyy-MM-dd\}}"  IsReadOnly="True"/>
+            <!--<DataGridTextColumn Header="Customized Category" Binding="{Binding CustomizedCategory}" IsReadOnly="False" />-->
         </DataGrid.Columns>
     </DataGrid>
 </UserControl>

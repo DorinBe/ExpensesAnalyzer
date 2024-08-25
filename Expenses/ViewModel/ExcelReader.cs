@@ -25,6 +25,7 @@ namespace Expenses.ViewModel
         /// when it did add the currency, a formatexception is thrown.
         /// function looks for known currencies and returns the parsed amountText without as a decimal with only digits.
         /// default currency is NIS.
+        /// billing amount dictates the currency.
         /// </summary>
         private static (decimal,string) handleAmount(string finalAmountText)
         {
@@ -85,13 +86,15 @@ namespace Expenses.ViewModel
                 for (int row = 2; row <= rowCount; row++) // Assuming the first row contains headers
                 {
                     (decimal finalAmountDecimal, string currency) = handleAmount(worksheet.Cells[row, 1].Text);
+                    (decimal transactionAmountDecimal, _) = handleAmount(worksheet.Cells[row, 2].Text);
                     var category = worksheet.Cells[row, 3].Text;
                     var description = worksheet.Cells[row, 4].Text;
                     var date = DateTime.ParseExact(worksheet.Cells[row, 5].Text, "dd/MM/yyyy", CultureInfo.InvariantCulture);
 
                     var expense = new ExpenseModel
                     {
-                        FinalAmount = finalAmountDecimal,
+                        BillingAmount = finalAmountDecimal,
+                        TransactionAmount = transactionAmountDecimal,
                         Category = category,
                         Description = description,
                         Date = date,

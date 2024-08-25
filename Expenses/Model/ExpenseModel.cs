@@ -9,22 +9,22 @@ namespace Expenses.Model
     public class ExpenseModel
     {
         /// <summary>
-        /// gets or sets final amount after credit card discounts
-        /// </summary>
-        public decimal FinalAmount { get; set; }    //column0
-
-
-        /// <summary>
         /// the currency of the transaction, USD or NIS 
-        /// this information is by default NIS but can be USD
+        /// default is NIS but can be USD
         /// </summary>
         public string Currency { get; set; }
 
 
         /// <summary>
-        /// gets or sets semi amount which is the original price before discounts
+        /// gets or sets final amount after credit card discounts
         /// </summary>
-        public decimal SemiAmount { get; set; }     //column1
+        public decimal BillingAmount { get; set; }    //column0
+
+
+        /// <summary>
+        /// gets or sets semi amount which is the original price before discounts or division into installments
+        /// </summary>
+        public decimal TransactionAmount { get; set; }     //column1
 
 
         /// <summary>
