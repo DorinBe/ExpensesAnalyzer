@@ -8,6 +8,13 @@ namespace Expenses.Model
     /// </summary>
     public class ExpenseModel
     {
+
+        /// <summary>
+        /// Unique value of the ExpenseModel (transaction)
+        /// </summary>
+        public int Key { get; set; }
+
+
         /// <summary>
         /// the currency of the transaction, USD or NIS 
         /// default is NIS but can be USD
@@ -48,6 +55,6 @@ namespace Expenses.Model
         /// <summary>
         /// User can associate a transaction to a specific customizedcategory and later on implement spcific calculations for each group of customizedcategories
         /// </summary>
-        public string CustomizedCategory {  get; set; }
+        public CustomeizedCategory SelectedCustomizedCategory {  get; set; }
     }
 }

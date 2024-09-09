@@ -11,17 +11,32 @@
             xmlns:views="clr-namespace:Expenses.Views"
             d:DataContext="{d:DesignInstance vms:MainViewModel}">
 
-
-
     <DataGrid ItemsSource="{Binding Expenses}" CanUserAddRows="False" AutoGenerateColumns="False" >
         <DataGrid.Columns>
+            <DataGridTextColumn Header="Key" Binding="{Binding Key}" IsReadOnly="True" Visibility="Hidden"/>
             <DataGridTextColumn Header="Currency" Binding="{Binding Currency}" IsReadOnly="True"/>
             <DataGridTextColumn Header="Billing Amount" Binding="{Binding BillingAmount}"  IsReadOnly="True"/>
             <DataGridTextColumn Header="Transaction Amount" Binding="{Binding TransactionAmount}" IsReadOnly="True"/>
             <DataGridTextColumn Header="Category" Binding="{Binding Category}"  IsReadOnly="True"/>
             <DataGridTextColumn Header="Description" Binding="{Binding Description}"  IsReadOnly="True"/>
             <DataGridTextColumn Header="Date" Binding="{Binding Date, StringFormat=\{0:yyyy-MM-dd\}}"  IsReadOnly="True"/>
-            <!--<DataGridTextColumn Header="Customized Category" Binding="{Binding CustomizedCategory}" IsReadOnly="False" />-->
+
+            <DataGridTemplateColumn Header="Customized Category">
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding SelectedCustomizedCategory.Name}" />
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+
+                <DataGridTemplateColumn.CellEditingTemplate>
+                    <DataTemplate>
+                        <ComboBox ItemsSource="{Binding DataContext.CustomizedCategories, RelativeSource={RelativeSource AncestorType=Window}}"
+                                  SelectedItem="{Binding SelectedCustomizedCategory, UpdateSourceTrigger=PropertyChanged}"
+                                  DisplayMemberPath="Name"/>
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellEditingTemplate>
+            </DataGridTemplateColumn>
+
         </DataGrid.Columns>
     </DataGrid>
 </UserControl>

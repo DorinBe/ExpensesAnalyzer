@@ -43,9 +43,7 @@ namespace Expenses.ViewModel
                     if (finalAmountDecimal.HasValue)
                         return (finalAmountDecimal.Value, _currency);
                 }
-                Console.WriteLine(ex.ToString());
             }
-            Console.WriteLine($"at ReadExpenses encountered error with finalAmountText={finalAmountText} where no currency was found and yet a FormatException is thrown.");
             return (finalAmountDecimal.Value, DefaultCurrency);
         }
 
@@ -85,6 +83,7 @@ namespace Expenses.ViewModel
 
                 for (int row = 2; row <= rowCount; row++) // Assuming the first row contains headers
                 {
+                    var key = row - 2;
                     (decimal finalAmountDecimal, string currency) = handleAmount(worksheet.Cells[row, 1].Text);
                     (decimal transactionAmountDecimal, _) = handleAmount(worksheet.Cells[row, 2].Text);
                     var category = worksheet.Cells[row, 3].Text;
@@ -93,6 +92,7 @@ namespace Expenses.ViewModel
 
                     var expense = new ExpenseModel
                     {
+                        Key = key,
                         BillingAmount = finalAmountDecimal,
                         TransactionAmount = transactionAmountDecimal,
                         Category = category,
